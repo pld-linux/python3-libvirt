@@ -5,7 +5,7 @@
 %bcond_without	python3		# CPython 3.x module
 
 # qemu available only on x86 and ppc
-%ifnarch %{ix86} %{x8664} ppc
+%ifnarch %{ix86} %{x8664} x32 ppc
 %undefine	with_qemu
 %endif
 
