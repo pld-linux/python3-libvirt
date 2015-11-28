@@ -68,15 +68,11 @@ Ten pakiet zawiera wiązania Pythona 3.x do biblioteki libvirt.
 %setup -q -n %{origname}-%{version}
 
 %build
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python} setup.py build \
+%py_build \
 	--build-base build-2
 
 %if %{with python3}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python3} setup.py build \
+%py3_build \
 	--build-base build-3
 %endif
 
