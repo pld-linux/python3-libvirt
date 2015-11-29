@@ -29,7 +29,7 @@ BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-devel >= 1:3
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.627
+BuildRequires:	rpmbuild(macros) >= 1.710
 BuildConflicts:	python-PyXML < 0.8.4-13
 Requires:	libvirt >= 1.0.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
