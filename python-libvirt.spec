@@ -14,7 +14,7 @@ Summary:	Python 2.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do współpracy z funkcjami wirtualizacji
 Name:		python-libvirt
 Version:	1.2.20
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.libvirt.org/libvirt/python/%{origname}-%{version}.tar.gz
@@ -68,35 +68,21 @@ Ten pakiet zawiera wiązania Pythona 3.x do biblioteki libvirt.
 %setup -q -n %{origname}-%{version}
 
 %build
-%py_build \
-	--build-base build-2
+%py_build
 
 %if %{with python3}
-%py3_build \
-	--build-base build-3
+%py3_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__python} setup.py \
-	build \
-		--build-base build-2 \
-	install \
-		--optimize=2 \
-		--skip-build \
-		--root=$RPM_BUILD_ROOT
+%py_install
 
 %py_postclean
 
 %if %{with python3}
-%{__python3} setup.py \
-	build \
-		--build-base build-3 \
-	install \
-		--optimize=2 \
-		--skip-build \
-		--root=$RPM_BUILD_ROOT
+%py3_install
 %endif
 
 %clean
