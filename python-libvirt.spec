@@ -13,13 +13,12 @@
 Summary:	Python 2.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do współpracy z funkcjami wirtualizacji
 Name:		python-libvirt
-Version:	2.5.0
+Version:	4.0.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.libvirt.org/libvirt/python/%{origname}-%{version}.tar.gz
-# Source0-md5:	6a064196181adcb7769e42c312a65610
-Patch0:		libvirt-python-build.patch
+# Source0-md5:	b3db91358dd759b89fbe38bfe24e5ca1
 URL:		http://www.libvirt.org/
 BuildRequires:	libvirt-devel >= 1.0.2
 BuildRequires:	pkgconfig
@@ -67,7 +66,6 @@ Ten pakiet zawiera wiązania Pythona 3.x do biblioteki libvirt.
 
 %prep
 %setup -q -n %{origname}-%{version}
-%patch0 -p1
 
 %build
 %py_build
@@ -112,6 +110,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/libvirtmod.*.so
 %{py3_sitedir}/libvirt.py
 %{py3_sitedir}/__pycache__/libvirt.*.py[co]
+%{py3_sitedir}/libvirtaio.py
+%{py3_sitedir}/__pycache__/libvirtaio.*.py[co]
 %if %{with lxc}
 %attr(755,root,root) %{py3_sitedir}/libvirtmod_lxc.*.so
 %{py3_sitedir}/libvirt_lxc.py
