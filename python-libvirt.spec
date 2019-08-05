@@ -13,12 +13,12 @@
 Summary:	Python 2.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do współpracy z funkcjami wirtualizacji
 Name:		python-libvirt
-Version:	5.5.0
+Version:	5.6.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.libvirt.org/libvirt/python/%{origname}-%{version}.tar.gz
-# Source0-md5:	4c8c38c409f967b8b47e0d7c6df050a4
+# Source0-md5:	143f83a2f89b6523a1b1c51be6a316b4
 URL:		http://www.libvirt.org/
 BuildRequires:	libvirt-devel >= 4.5.0
 BuildRequires:	pkgconfig
