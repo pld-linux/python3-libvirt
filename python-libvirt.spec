@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	lxc		# LXC support
 %bcond_without	qemu		# Qemu support
+%bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
 
 # qemu available only on x86 and ppc
@@ -13,25 +14,28 @@
 Summary:	Python 2.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 2.x do współpracy z funkcjami wirtualizacji
 Name:		python-libvirt
-Version:	5.6.0
-Release:	2
+# keep 5.x here for python2 support
+Version:	5.10.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
-Source0:	ftp://ftp.libvirt.org/libvirt/python/%{origname}-%{version}.tar.gz
-# Source0-md5:	143f83a2f89b6523a1b1c51be6a316b4
-URL:		http://www.libvirt.org/
-BuildRequires:	libvirt-devel >= 4.5.0
+Source0:	https://libvirt.org/sources/python/%{origname}-%{version}.tar.gz
+# Source0-md5:	045c8b45a1aed0725d874ce072027570
+URL:		https://libvirt.org/
+BuildRequires:	libvirt-devel >= 5.10.0
 BuildRequires:	pkgconfig
-BuildRequires:	python >= 1:2.4
-BuildRequires:	python-devel >= 1:2.4
+%if %{with python2}
+BuildRequires:	python >= 1:2.5
+BuildRequires:	python-devel >= 1:2.5
+%endif
 %if %{with python3}
-BuildRequires:	python3 >= 1:3
-BuildRequires:	python3-devel >= 1:3
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.2
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildConflicts:	python-PyXML < 0.8.4-13
-Requires:	libvirt >= 4.5.0
+Requires:	libvirt >= 5.10.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +54,7 @@ Ten pakiet zawiera wiązania Pythona 2.x do biblioteki libvirt.
 Summary:	Python 3.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do współpracy z funkcjami wirtualizacji
 Group:		Development/Languages/Python
-Requires:	libvirt >= 1.0.2
+Requires:	libvirt >= 5.10.0
 
 %description -n python3-libvirt
 Libvirt is a C toolkit to interact with the virtualization
@@ -68,7 +72,9 @@ Ten pakiet zawiera wiązania Pythona 3.x do biblioteki libvirt.
 %setup -q -n %{origname}-%{version}
 
 %build
+%if %{with python2}
 %py_build
+%endif
 
 %if %{with python3}
 %py3_build
@@ -77,9 +83,11 @@ Ten pakiet zawiera wiązania Pythona 3.x do biblioteki libvirt.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %py_install
 
 %py_postclean
+%endif
 
 %if %{with python3}
 %py3_install
@@ -88,9 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README NEWS
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{py_sitedir}/libvirtmod.so
 %{py_sitedir}/libvirt.py[co]
 %if %{with lxc}
@@ -102,11 +111,12 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/libvirt_qemu.py[co]
 %endif
 %{py_sitedir}/libvirt_python-%{version}-py*.egg-info
+%endif
 
 %if %{with python3}
 %files -n python3-libvirt
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README NEWS
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{py3_sitedir}/libvirtmod.*.so
 %{py3_sitedir}/libvirt.py
 %{py3_sitedir}/__pycache__/libvirt.*.py[co]
