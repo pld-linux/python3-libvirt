@@ -12,21 +12,21 @@
 Summary:	Python 3.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do współpracy z funkcjami wirtualizacji
 Name:		python3-libvirt
-Version:	6.6.0
-Release:	6
+Version:	8.8.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	https://libvirt.org/sources/python/%{origname}-%{version}.tar.gz
-# Source0-md5:	f153718d1d47c2e101b2e152e75fabd3
+# Source0-md5:	91539c3e6e821e49e01a90452c74a51e
 URL:		https://libvirt.org/
-BuildRequires:	libvirt-devel >= 6.6.0
+BuildRequires:	libvirt-devel >= 8.8.0
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.5
 BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildConflicts:	python-PyXML < 0.8.4-13
-Requires:	libvirt >= 6.6.0
+Requires:	libvirt >= 8.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
