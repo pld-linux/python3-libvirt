@@ -13,7 +13,7 @@ Summary:	Python 3.x bindings to interact with virtualization capabilities
 Summary(pl.UTF-8):	Wiązania Pythona 3.x do współpracy z funkcjami wirtualizacji
 Name:		python3-libvirt
 Version:	10.8.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	https://download.libvirt.org/python/%{origname}-%{version}.tar.gz
